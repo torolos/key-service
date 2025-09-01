@@ -4,7 +4,7 @@ from typing import Dict, Any, Tuple, Optional
 
 from cryptography.hazmat.primitives.asymmetric import rsa, ed25519, ec
 from cryptography.hazmat.primitives import serialization
-from helpers import b64url, b64url_uint
+from keyservice.helpers import b64url, b64url_uint
 
 # ---------- Strategy interface ----------
 class KeyStrategy(ABC):

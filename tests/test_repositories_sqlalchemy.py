@@ -1,10 +1,10 @@
 import pytest
 from datetime import timedelta
-from config import Config
-from extensions import db
-from models import KeyPair
-from repositories import SQLAlchemyKeyRepository
-from helpers import now_utc
+from keyservice.config import Config
+from keyservice.extensions import db
+from keyservice.models import KeyPair
+from keyservice.repositories import SQLAlchemyKeyRepository
+from keyservice.helpers import now_utc
 
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"

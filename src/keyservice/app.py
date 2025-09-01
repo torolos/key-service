@@ -4,15 +4,15 @@ from datetime import datetime, timedelta, timezone
 from typing import List, Dict, Any
 
 from flask import Flask, jsonify, request, abort
-from config import Config
-from extensions import db
-from models import KeyPair
-from helpers import now_utc, generate_kid_non_colliding
-from strategies import registry, RSAKeyStrategy, Ed25519KeyStrategy, ECP256KeyStrategy
-from repositories import KeyRepository, SQLAlchemyKeyRepository
+from keyservice.config import Config
+from keyservice.extensions import db
+from keyservice.models import KeyPair
+from keyservice.helpers import now_utc, generate_kid_non_colliding
+from keyservice.strategies import registry, RSAKeyStrategy, Ed25519KeyStrategy, ECP256KeyStrategy
+from keyservice.repositories import KeyRepository, SQLAlchemyKeyRepository
 
 # NEW
-from auth import InMemoryAuthRepository, AWSSecretsAuthRepository, make_require_roles
+from keyservice.auth import InMemoryAuthRepository, AWSSecretsAuthRepository, make_require_roles
 
 def create_app(config_class=Config) -> Flask:
     app = Flask(__name__)

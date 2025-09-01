@@ -2,9 +2,9 @@ import os
 import pytest
 from datetime import timedelta
 from types import SimpleNamespace
-from helpers import now_utc
+from keyservice.helpers import now_utc
 try:
-    from repositories_psycopg import PsycopgKeyRepository, DDL
+    from keyservice.repositories_psycopg import PsycopgKeyRepository, DDL
     import psycopg
 except Exception:  # pragma: no cover
     PsycopgKeyRepository = None

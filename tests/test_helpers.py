@@ -1,6 +1,6 @@
 import types
 from types import SimpleNamespace
-from helpers import b64url, b64url_uint, now_utc, generate_kid_non_colliding
+from keyservice.helpers import b64url, b64url_uint, now_utc, generate_kid_non_colliding
 import base64
 
 def b64url_decode(s: str) -> bytes:

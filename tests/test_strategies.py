@@ -1,5 +1,5 @@
 import base64
-from strategies import RSAKeyStrategy, Ed25519KeyStrategy, ECP256KeyStrategy
+from keyservice.strategies import RSAKeyStrategy, Ed25519KeyStrategy, ECP256KeyStrategy
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa, ed25519, ec
 

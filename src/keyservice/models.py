@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 from sqlalchemy import UniqueConstraint
-from extensions import db
+from keyservice.extensions import db
 
 class KeyPair(db.Model):
     __tablename__ = "key_pairs"
