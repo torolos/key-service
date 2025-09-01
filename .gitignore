@@ -1,0 +1,7 @@
+.venv/
+.vscode/
+.pytest_cache/
+# Ignore all __pycache__ directories at any depth
+**/__pycache__/
+*.py[cod]
+*$py.class
