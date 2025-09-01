@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: jwks-pg
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: jwks
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d jwks"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build: .
+    container_name: jwks-app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      STORAGE_BACKEND: psycopg
+      POSTGRES_DSN: postgresql://postgres:postgres@db:5432/jwks
+      PORT: "8000"
+      PYTHONPATH: /app/src
+    ports:
+      - "8000:8000"
+    command: >
+      gunicorn -w 2 -b 0.0.0.0:${PORT} app:app
+    # For live-reload dev:
+    # volumes:
+    #   - ./src:/app/src:delegated
+
+volumes:
+  pgdata:
