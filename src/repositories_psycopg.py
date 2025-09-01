@@ -4,7 +4,7 @@ from datetime import datetime
 import psycopg
 from psycopg.rows import dict_row
 
-from keyservice.repositories import KeyRepository
+from repositories import KeyRepository
 # We avoid importing SQLAlchemy model here; we return dicts & build KeyPair-like dicts.
 
 DDL = """

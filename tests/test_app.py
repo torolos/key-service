@@ -2,9 +2,9 @@ from datetime import datetime, timedelta, timezone
 import base64
 import pytest
 
-from keyservice.app import create_app
-from keyservice.extensions import db
-from keyservice.models import KeyPair
+from app import create_app
+from extensions import db
+from models import KeyPair
 
 def basic(cid, secret):
     token = base64.b64encode(f"{cid}:{secret}".encode()).decode()
@@ -109,7 +109,7 @@ def test_admin_list_filters_and_pagination(client, app):
     # add expired & inactive directly
     with app.app_context():
         active = KeyPair.query.filter_by(tenant_id="list", key_id=r1.get_json()["key_id"]).first()
-        from keyservice.extensions import db as _db
+        from extensions import db as _db
         expired = KeyPair(
             tenant_id="list", key_id=2, key_type="rsa",
             private_key_pem=active.private_key_pem, public_key_pem=active.public_key_pem,

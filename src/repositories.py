@@ -2,8 +2,8 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Iterable, Optional, Tuple
 from datetime import datetime
-from keyservice.extensions import db
-from keyservice.models import KeyPair
+from extensions import db
+from models import KeyPair
 
 # ---------- Repository interface ----------
 class KeyRepository(ABC):
