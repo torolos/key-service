@@ -10,6 +10,7 @@ from models import KeyPair
 from helpers import now_utc, generate_kid_non_colliding
 from strategies import registry, RSAKeyStrategy, Ed25519KeyStrategy, ECP256KeyStrategy
 from repositories import KeyRepository, SQLAlchemyKeyRepository
+from repositories_psycopg import PsycopgKeyRepository
 
 # NEW
 from auth import InMemoryAuthRepository, AWSSecretsAuthRepository, make_require_roles
@@ -31,6 +32,10 @@ def create_app(config_class=Config) -> Flask:
         repo: KeyRepository = SQLAlchemyKeyRepository()
         with app.app_context():
             db.create_all()
+    elif storage == "psycopg":
+        # Psycopg repo manages its own table DDL if missing
+        dsn = app.config["POSTGRES_DSN"]
+        repo = PsycopgKeyRepository(dsn)
     else:
         raise RuntimeError(f"Unsupported STORAGE_BACKEND={storage}")
 
